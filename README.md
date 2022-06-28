@@ -13,42 +13,42 @@ Please note that this repository will be aimed at low-level (i.e. Poplar) C++
 code for the IPU. If you're looking for help with your Tensorflow or PyTorch project, it
 won't be very helpful to you.
 
-
-- [Table of Contents](#an-hpc-cookbook-for-the-graphcore-ipu)
-  * [Basics](#basics)
-    + [The Poplar SDK](#the-poplar-sdk)
-    + [If you haven't got access to an IPU](#if-you-haven-t-got-access-to-an-ipu)
-    + [A productive development workflow](#a-productive-development-workflow)
-    + [Skeleton program](#skeleton-program)
-    + [IPUModel (emulator)](#ipumodel--emulator-)
-    + [Testing](#testing)
-    + [Timing program execution](#timing-program-execution)
-  * [Writing faster codelets](#writing-faster-codelets)
-    + [Inspecting compiler output](#inspecting-compiler-output)
-    + [Encouraging auto-vectorisation](#encouraging-auto-vectorisation)
-    + [Manual vectorisation](#manual-vectorisation)
-    + [Alignment](#alignment)
-    + [Preventing data rearrangements](#preventing-data-rearrangements)
-    + [Representing complex local data structures](#representing-complex-local-data-structures)
-  * [Assembly vertexes](#assembly-vertexes)
-    + [Including inline assembly](#including-inline-assembly)
-  * [Scheduling workers](#scheduling-workers)
-    + [When data naturally fits in distinct tensors](#when-data-naturally-fits-in-distinct-tensors)
-    + [Sharing data structures between workers on a tile using MultiVertexes](#sharing-data-structures-between-workers-on-a-tile-using-multi-vertexes)
-  * [When data is too big for the IPU: Using off-chip memory ("RemoteBuffers")](#when-data-is-too-big-for-the-ipu--using-off-chip-memory---remotebuffers--)
-  * [Pattern: structured grids](#pattern--structured-grids)
-    + [Halo exchange](#halo-exchange)
-  * [Pattern: unstructured grids](#pattern--unstructured-grids)
-    + [Neighbour lists](#neighbour-lists)
-  * [General Recipes](#general-recipes)
-    + [Evaluating memory bandwidth](#evaluating-memory-bandwidth)
-    + [Appending values to a global distributed array](#appending-values-to-a-global-distributed-array)
-    + [Efficient streaming of data from the host](#efficient-streaming-of-data-from-the-host)
-    + [Pipelined wavefront execution](#pipelined-wavefront-execution)
-    + [Sending variable amounts of data to neighbouring tiles](#sending-variable-amounts-of-data-to-neighbouring-tiles)
-- [References](#references)
-- [Acknowledgements](#acknowledgements)
-
+* [An HPC Cookbook for the Graphcore IPU](#an-hpc-cookbook-for-the-graphcore-ipu)
+   * [Basics](#basics)
+      * [The Poplar SDK](#the-poplar-sdk)
+      * [If you haven't got access to an IPU](#if-you-havent-got-access-to-an-ipu)
+      * [A productive development workflow](#a-productive-development-workflow)
+      * [Skeleton program](#skeleton-program)
+      * [IPUModel (emulator)](#ipumodel-emulator)
+      * [Testing](#testing)
+      * [Timing program execution](#timing-program-execution)
+   * [Writing faster codelets](#writing-faster-codelets)
+      * [Inspecting compiler output](#inspecting-compiler-output)
+      * [Encouraging auto-vectorisation](#encouraging-auto-vectorisation)
+      * [Manual vectorisation](#manual-vectorisation)
+      * [Alignment](#alignment)
+      * [Preventing data rearrangements](#preventing-data-rearrangements)
+      * [Representing complex local data structures](#representing-complex-local-data-structures)
+   * [Assembly vertexes](#assembly-vertexes)
+      * [Including inline assembly](#including-inline-assembly)
+   * [Scheduling workers](#scheduling-workers)
+      * [When data naturally fits in distinct tensors](#when-data-naturally-fits-in-distinct-tensors)
+      * [Sharing data structures between workers on a tile using Multi-vertexes](#sharing-data-structures-between-workers-on-a-tile-using-multi-vertexes)
+   * [When data is too big for the IPU: Using off-chip memory ("RemoteBuffers")](#when-data-is-too-big-for-the-ipu-using-off-chip-memory-remotebuffers)
+   * [Pattern: structured grids](#pattern-structured-grids)
+      * [Halo exchange](#halo-exchange)
+   * [Pattern: unstructured grids](#pattern-unstructured-grids)
+      * [Neighbour lists](#neighbour-lists)
+   * [General Recipes](#general-recipes)
+      * [Evaluating memory bandwidth](#evaluating-memory-bandwidth)
+      * [Appending values to a global distributed array](#appending-values-to-a-global-distributed-array)
+      * [Efficient streaming of data from the host](#efficient-streaming-of-data-from-the-host)
+      * [Pipelined wavefront execution](#pipelined-wavefront-execution)
+      * [Sending variable amounts of data to neighbouring tiles](#sending-variable-amounts-of-data-to-neighbouring-tiles)
+   * [HPC Example Algorithms for IPU](#hpc-example-algorithms-for-ipu)
+      * [Monte-Carlo estimation examples](#monte-carlo-estimation-examples)
+* [References](#references)
+* [Acknowledgements](#acknowledgements)
 
 ## Basics
 
@@ -262,6 +262,12 @@ pipelined wavefront execution is in [Pipelined Wavefront Execution](pipelined-wa
 In some simulations (e.g. particle simulations), the communication patterns are dynamic and data-driven. This seems at odds
 with Poplar's compiled communication approach, but we show one way to work around this in the 
 [Data-dependent Communication](data-dependent-communication) recipe.
+
+## HPC Example Algorithms for IPU
+
+### Monte-Carlo estimation examples  
+Two examples of [Monte-Carlo method](https://en.wikipedia.org/wiki/Monte_Carlo_method): calculating PI and definite integrals which are
+availalbe in [monte-carlo-method](monte-carlo-method/).
 
 # References
 [1] Williams, Samuel, Andrew Waterman, and David Patterson. <cite>"Roofline: an insightful visual performance model for multicore architectures."</cite> Communications of the ACM 52.4 (2009): 65-76.
