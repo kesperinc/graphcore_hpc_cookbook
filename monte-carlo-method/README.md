@@ -12,7 +12,7 @@ Table of Contents
 
 # Monte Carlo method implementation examples
 
-Example programs to estimate PI and definte integral value using Monte Carlo method
+Example programs to estimate PI and definite integral value using Monte Carlo method
 for IPU architecture.
 
 # Usage
