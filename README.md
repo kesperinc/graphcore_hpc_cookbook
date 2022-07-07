@@ -47,6 +47,7 @@ won't be very helpful to you.
       * [Sending variable amounts of data to neighbouring tiles](#sending-variable-amounts-of-data-to-neighbouring-tiles)
    * [HPC Example Algorithms for IPU](#hpc-example-algorithms-for-ipu)
       * [Monte-Carlo estimation examples](#monte-carlo-estimation-examples)
+      * [Matmul FLOPS benchmark](#matmul-flops-benchmark)
 * [References](#references)
 * [Acknowledgements](#acknowledgements)
 
@@ -268,6 +269,9 @@ with Poplar's compiled communication approach, but we show one way to work aroun
 ### Monte-Carlo estimation examples  
 Two examples of [Monte-Carlo method](https://en.wikipedia.org/wiki/Monte_Carlo_method): calculating PI and definite integrals which are
 availalbe in [monte-carlo-method](monte-carlo-method/).
+
+### Matrix multiplication FLOPS benchmark
+Example how to measure and achieve FLOPS in matrix multiplication.
 
 # References
 [1] Williams, Samuel, Andrew Waterman, and David Patterson. <cite>"Roofline: an insightful visual performance model for multicore architectures."</cite> Communications of the ACM 52.4 (2009): 65-76.
