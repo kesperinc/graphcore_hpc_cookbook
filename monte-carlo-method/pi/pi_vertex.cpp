@@ -12,11 +12,11 @@ class PiVertex : public MultiVertex {
 
 public:
     Output<Vector<unsigned int>> hits;
-    int iterations;
+    int iterations, NumElemsPerTile;
 
     auto compute(unsigned i) -> bool {
         int count = 0;
-        for (auto i = 0; i < iterations; i++) {
+        for (auto i = 0; i < 50; i++) {
             // auto x = (float)__builtin_ipu_urand32() / (float)UINT_MAX;
             // auto y = (float)__builtin_ipu_urand32() / (float)UINT_MAX;
             // auto val = x * x + y * y;

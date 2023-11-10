@@ -95,25 +95,28 @@ int main(int argc, char *argv[]) {
 
     std::cout << "STEP 3: Define data streams" << std::endl;
     size_t numTiles = device->getTarget().getNumTiles();
-    auto fromIpuStream = graph.addDeviceToHostFIFO("FROM_IPU", UNSIGNED_INT, numTiles * 6); //Device to host FIFO 스트림을 만들어서 여러 ipu를 사용
+    auto fromIpuStream = graph.addDeviceToHostFIFO("FROM_IPU", UNSIGNED_INT, numTiles * 60); //Device to host FIFO 스트림을 만들어서 여러 ipu를 사용
 
     std::cout << "STEP 4: Building the compute graph" << std::endl;
-    auto counts = graph.addVariable(UNSIGNED_INT, {numTiles * 6}, "counts");
+    auto counts = graph.addVariable(UNSIGNED_INT, {numTiles * 60}, "counts");
     poputil::mapTensorLinearly(graph, counts);          // vertex를 직선으로 나열하여 정리 각 슬라이스에서 처리한 counts 
 
-    const auto NumElemsPerTile = iterations / (numTiles * 6);
+    // const auto NumElemsPerTile = iterations / (numTiles * 60);
+    const auto NumElemsPerTile = 60;
     auto cs = graph.addComputeSet("loopBody");          //loopBody computeset을 설정 
+
     std::cout << "numTiles = " << numTiles << std::endl;
     std::cout << "NumElemsPerTile = " << NumElemsPerTile << std::endl;
 
     for (auto tileNum = 0u; tileNum < numTiles; tileNum++) {
-        const auto sliceStart = tileNum * 6;             //tile을 0~6, 7~12 등 6개 단위로 나눈다 
-        const auto sliceEnd = (tileNum + 1) * 6; 
+        const auto sliceStart = tileNum * 60;             //tile을 0~6, 7~12 등 6개 단위로 나눈다 
+        const auto sliceEnd = (tileNum + 1) * 60; 
+        std::cout << "sliceStart,  sliceEnd= " << sliceStart<< ","<< sliceEnd << std::endl;
 
         auto v = graph.addVertex(cs, "PiVertex", {
                 {"hits", counts.slice(sliceStart, sliceEnd)} //PiVertex computeset을 만들고 vertex를 슬라이스에 할당한다. 
         });
-        graph.setInitialValue(v["iterations"], NumElemsPerTile);
+        graph.setInitialValue(v["iterations"], 60);
         graph.setPerfEstimate(v, 10); // Ideally you'd get this as right as possible
         graph.setTileMapping(v, tileNum);
     }
@@ -140,8 +143,7 @@ int main(int argc, char *argv[]) {
     std::cout << "STEP 7: Attach data streams" << std::endl;
     
     std::cout << "iterations (bytes)= " << iterations << std::endl;
-    // auto results = std::vector<unsigned int>(numTiles * 6); 
-    auto results = std::vector<unsigned int>(iterations); 
+    auto results = std::vector<unsigned int>(numTiles * 60 ); 
     engine.connectStream("FROM_IPU", results.data(), results.data() + results.size());  // IPU에서 받아 results에 저장
     std::cout << "results.size = " << results.size() << std::endl;
     std::cout << "results = " << results[0] << std::endl;
