@@ -5,7 +5,7 @@
 #include <boost/program_options.hpp>
 #include <iostream>
 
-static const int NUM_DATA_ITEMS = 30000000;
+static const int NUM_DATA_ITEMS = 26496000;  //iterations
 static const auto CHUNK_SIZE = 10000000ul;
 struct pi_options {
     unsigned long iterations;

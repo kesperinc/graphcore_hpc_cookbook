@@ -13,6 +13,7 @@ macro(add_benchmark)
         cmake_parse_arguments(local "" "${singleValue}" "${multipleValues}" ${ARGN})
 
         add_executable(${local_NAME} ${local_SOURCES})
+        include_directories("/home/sunkim317/.local/include")
         target_link_libraries(${local_NAME} boost_program_options poplar poputil popops poprand)
 endmacro()
 

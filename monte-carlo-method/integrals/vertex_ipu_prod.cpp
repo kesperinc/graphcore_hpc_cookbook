@@ -140,11 +140,11 @@ int main(int argc, char *argv[]) {
             {"target.saveArchive",                "archive.a"},
             {"debug.instrument",                  "true"},
             {"debug.instrumentCompute",           "true"},
-            {"debug.loweredVarDumpFile",          "vars.capnp"},
             {"debug.instrumentControlFlow",       "true"},
             {"debug.computeInstrumentationLevel", "tile"},
             {"debug.outputAllSymbols",            "true"},
             {"autoReport.all",                    "true"},
+            {"autoReport.outputLoweredVars",      "true"},
             {"autoReport.outputSerializedGraph",  "true"},
             {"debug.retainDebugInformation",      "true"}
     };

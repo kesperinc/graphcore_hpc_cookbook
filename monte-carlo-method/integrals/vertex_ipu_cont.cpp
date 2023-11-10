@@ -129,12 +129,12 @@ int main(int argc, char *argv[]) {
             {"target.saveArchive",                "archive.a"},
             {"debug.instrument",                  "true"},
             {"debug.instrumentCompute",           "true"},
-            {"debug.loweredVarDumpFile",          "vars.capnp"},
             {"debug.instrumentControlFlow",       "true"},
             {"debug.computeInstrumentationLevel", "tile"},
             {"debug.outputAllSymbols",            "true"},
             {"autoReport.all",                    "true"},
             {"autoReport.outputSerializedGraph",  "true"},
+            {"autoReport.outputLoweredVars",      "true"},  //SunKim changed because of error debug.loweredVarDumpfile
             {"debug.retainDebugInformation",      "true"}
     };
     auto engine = Engine(graph, Sequence({Execute(cs), Copy(out, fromIpuStream)}), ENGINE_OPTIONS);

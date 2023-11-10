@@ -14,6 +14,8 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -Wall -ansi -Wno-deprecated -march=native -mtune=native -O3")
 endif()
 
+include_directories("/home/sunkim317/.local/include")
+link_directories("/home/sunkim317/.local/lib")
 find_package(poplar REQUIRED)
 add_subdirectory(pi)
 add_subdirectory(integrals)

@@ -67,7 +67,6 @@ auto getIpuDevice(const unsigned int numIpus = 1) -> optional<Device> {
 
 auto createGraphAndAddCodelets(const optional<Device> &device) -> Graph {
     auto graph = poplar::Graph(device->getTarget());
-
     popops::addCodelets(graph);
     poprand::addCodelets(graph);
     return graph;
@@ -142,11 +141,11 @@ int main(int argc, char *argv[]) {
             {"target.saveArchive",                "archive.a"},
             {"debug.instrument",                  "true"},
             {"debug.instrumentCompute",           "true"},
-            {"debug.loweredVarDumpFile",          "vars.capnp"},
             {"debug.instrumentControlFlow",       "true"},
             {"debug.computeInstrumentationLevel", "tile"},
             {"debug.outputAllSymbols",            "true"},
             {"autoReport.all",                    "true"},
+            {"autoReport.outputLoweredVars",      "true"}, //changed by Sunkim to eliminate error debu.loweredVarDumpfile 
             {"autoReport.outputSerializedGraph",  "true"},
             {"debug.retainDebugInformation",      "true"}
     };
@@ -167,8 +166,13 @@ int main(int argc, char *argv[]) {
     auto start = std::chrono::steady_clock::now();
     engine.run(0, "main"); // Main program
     auto stop = std::chrono::steady_clock::now();
-    for (size_t i = 0; i < results.size(); i++)
+
+    for (size_t i = 0; i < results.size(); i++){
         hits += results[i]; 
+        //for(unsigned int val : results) std::cout << "Rand Number: " << " " << (float)val/(float)UINT32_MAX << std::endl;
+        for(unsigned int val : results) std::cout << "Rand Number: " << " " << val << std::endl;
+
+    }
 
     std::cout << "STEP 9: Capture debug and profile info" << std::endl;
     serializeGraph(graph);

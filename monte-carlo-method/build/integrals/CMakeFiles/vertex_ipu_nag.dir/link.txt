@@ -1,0 +1,1 @@
+/usr/bin/g++  -Wall -Werror -ansi -Wno-deprecated -g CMakeFiles/vertex_ipu_nag.dir/vertex_ipu_nag.cpp.o -o vertex_ipu_nag   -L/home/sunkim317/.local/lib  -Wl,-rpath,/home/sunkim317/.local/lib -lboost_program_options /home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/lib/libpoplar.so -lpoputil -lpopops -lpoprand 
