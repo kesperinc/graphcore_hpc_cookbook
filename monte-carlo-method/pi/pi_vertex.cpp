@@ -11,7 +11,7 @@ using namespace poplar;
 class PiVertex : public MultiVertex {
 
 public:
-    Output<Vector<unsigned int>> hits;
+    Output<Vector<float>> hits;
     int iterations, NumElemsPerTile;
 
     auto compute(unsigned i) -> bool {
@@ -21,10 +21,9 @@ public:
             // auto y = (float)__builtin_ipu_urand32() / (float)UINT_MAX;
             // auto val = x * x + y * y;
             // count +=  val < 1.f; 
-            hits[i] = __builtin_ipu_urand32() ;
+            // hits[i] = __builtin_ipu_urand32() ; //UINT RNG
+            hits[i] = (float)__builtin_ipu_urand32() / (float)UINT_MAX ;
         }
-        hits[i] = __builtin_ipu_urand32() ;
-
         return true;
     }
     auto ipu_genrand_uint32(){
