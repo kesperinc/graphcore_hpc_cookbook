@@ -16,6 +16,15 @@
 #include <poputil/TileMapping.hpp>
 #include <poplar/DeviceManager.hpp>
 #include <poplar/Program.hpp>
+#include <popops/ElementWise.hpp>
+#include <popops/Reduce.hpp>
+#include <popops/Fill.hpp>
+#include <popops/Expr.hpp>
+#include <popops/Cast.hpp>
+#include <popops/Zero.hpp>
+#include <popops/codelets.hpp>
+#include <poprand/RandomGen.hpp>
+#include <poprand/codelets.hpp>
 
 using ::std::map;
 using ::std::vector;
@@ -58,10 +67,20 @@ auto getIpuDevice(const unsigned int numIpus = 1) -> optional<Device> {
 
 auto createGraphAndAddCodelets(const optional<Device> &device) -> Graph {
     auto graph = poplar::Graph(device->getTarget());
-
+    popops::addCodelets(graph);
+    poprand::addCodelets(graph);
     graph.addCodelets({"pi_vertex.cpp"}, "-O3");
     return graph;
 }
+
+/*
+auto createGraphAndAddCodelets(const optional<Device> &device) -> Graph {
+    auto graph = poplar::Graph(device->getTarget());
+    popops::addCodelets(graph);
+    poprand::addCodelets(graph);
+    return graph;
+}
+*/
 
 auto serializeGraph(const Graph &graph) {
     std::ofstream graphSerOfs;
@@ -95,31 +114,35 @@ int main(int argc, char *argv[]) {
 
     std::cout << "STEP 3: Define data streams" << std::endl;
     size_t numTiles = device->getTarget().getNumTiles();
-    auto fromIpuStream = graph.addDeviceToHostFIFO("FROM_IPU", FLOAT, numTiles * 60); //Device to host FIFO 스트림을 만들어서 여러 ipu를 사용
-    // UNSIGNED INT --> FLOAT 변경. IPU-->CPU로 전달하는 데이터 타입을 정의해야 함 
+    auto fromIpuStream = graph.addDeviceToHostFIFO("FROM_IPU", FLOAT, numTiles * 6);
 
     std::cout << "STEP 4: Building the compute graph" << std::endl;
-    // auto counts = graph.addVariable(UNSIGNED_INT, {numTiles * 60}, "counts");
-    auto counts = graph.addVariable(FLOAT, {numTiles * 60}, "counts");  // IPU 메모리에 있는 데이터는 counts라는 이름으로 정의됨 FLOAT변경 
-    poputil::mapTensorLinearly(graph, counts);          // vertex를 직선으로 나열하여 정리 각 슬라이스에서 처리한 counts 
+    auto counts = graph.addVariable(FLOAT, {numTiles * 6}, "counts");
+    poputil::mapTensorLinearly(graph, counts);
 
-    // const auto NumElemsPerTile = iterations / (numTiles * 60);
-    const auto NumElemsPerTile = 60;
-    auto cs = graph.addComputeSet("loopBody");          //loopBody computeset을 설정 
+    Sequence map;
 
-    std::cout << "numTiles = " << numTiles << std::endl;
+    auto rnd = graph.addVariable(FLOAT, {1}, "rnd");
+    poputil::mapTensorLinearly(graph, rnd);
+    rnd = poprand::uniform(graph, NULL, 0, rnd, FLOAT, 0.f, 1.f, map);
+
+    std::cout << "RND from poprand" << rnd << std::endl;
+
+
+    const auto NumElemsPerTile = iterations / (numTiles * 6);
+    auto cs = graph.addComputeSet("loopBody");
     std::cout << "NumElemsPerTile = " << NumElemsPerTile << std::endl;
 
-    for (auto tileNum = 0u; tileNum < numTiles; tileNum++) {
-        const auto sliceStart = tileNum * 60;             //tile을 0~6, 7~12 등 6개 단위로 나눈다 
-        const auto sliceEnd = (tileNum + 1) * 60; 
+    for (auto rank = 0u; rank < numTiles; rank++) {
+        const auto sliceStart = rank  ;
+        const auto sliceEnd = (rank + 1)  ; 
 
         auto v = graph.addVertex(cs, "PiVertex", {
-                {"hits", counts.slice(sliceStart, sliceEnd)} //PiVertex computeset을 만들고 vertex를 슬라이스에 할당한다. 
+                {"hits", counts.slice(sliceStart, sliceEnd)}
         });
-        graph.setInitialValue(v["iterations"], 60);
+        graph.setInitialValue(v["iterations"], NumElemsPerTile);
         graph.setPerfEstimate(v, 10); // Ideally you'd get this as right as possible
-        graph.setTileMapping(v, tileNum);
+        graph.setTileMapping(v, rank);
     }
  
     std::cout << "STEP 5: Create engine and compile graph" << std::endl;
@@ -142,23 +165,17 @@ int main(int argc, char *argv[]) {
     engine.enableExecutionProfiling();
 
     std::cout << "STEP 7: Attach data streams" << std::endl;
-    
-    std::cout << "iterations (bytes)= " << iterations << std::endl;
-    auto results = std::vector<float>(numTiles * 60 ); 
-    engine.connectStream("FROM_IPU", results.data(), results.data() + results.size());  // IPU에서 받아 results에 저장
-    std::cout << "results.size = " << results.size() << std::endl;
-    std::cout << "results = " << results[0] << std::endl;
+    auto results = std::vector<unsigned int>(numTiles * 6);
+    engine.connectStream("FROM_IPU", results.data(), results.data() + results.size());
 
     std::cout << "STEP 8: Run programs" << std::endl;
-    auto hits = 0ull;  //unsigned long long
+    auto hits = 0ull;
     
     auto start = std::chrono::steady_clock::now();
     engine.run(0, "main"); // Main program
-
     auto stop = std::chrono::steady_clock::now();
     for (size_t i = 0; i < results.size(); i++) {
-        // hits += results[i];
-        std::cout << "rand = " << results[i] << " " << (float) results[i]/(float)UINT32_MAX << std::endl;
+        hits += results[i];
     }
 
     std::cout << "STEP 9: Capture debug and profile info" << std::endl;

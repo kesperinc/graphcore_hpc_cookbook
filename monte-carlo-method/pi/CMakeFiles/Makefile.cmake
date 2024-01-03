@@ -43,7 +43,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/sunkim317/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.27/Modules/Platform/Linux.cmake"
   "/home/sunkim317/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.27/Modules/Platform/UnixPaths.cmake"
   "/home/sunkim317/hpc-cookbook/monte-carlo-method/CMakeLists.txt"
-  "/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/CMakeLists.txt"
   "CMakeFiles/3.27.7/CMakeCCompiler.cmake"
   "CMakeFiles/3.27.7/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.27.7/CMakeSystem.cmake"
@@ -77,16 +76,10 @@ set(CMAKE_MAKEFILE_OUTPUTS
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "pi/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "integrals/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "pi/CMakeFiles/poplibs_ipu_pi.dir/DependInfo.cmake"
   "pi/CMakeFiles/vertex_ipu_pi.dir/DependInfo.cmake"
   "pi/CMakeFiles/iterative_ipu_pi.dir/DependInfo.cmake"
-  "integrals/CMakeFiles/vertex_ipu_cont.dir/DependInfo.cmake"
-  "integrals/CMakeFiles/vertex_ipu_nag.dir/DependInfo.cmake"
-  "integrals/CMakeFiles/vertex_ipu_corner.dir/DependInfo.cmake"
-  "integrals/CMakeFiles/vertex_ipu_prod.dir/DependInfo.cmake"
   )

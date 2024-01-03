@@ -1,12 +1,6 @@
 [
 {
   "directory": "/home/sunkim317/hpc-cookbook/monte-carlo-method/build/pi",
-  "command": "/usr/bin/g++  -I/home/sunkim317/.local/include -isystem /home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/include  -Wall -Werror -ansi -Wno-deprecated -g -std=c++17 -o CMakeFiles/poplibs_ipu_pi.dir/poplibs_ipu_pi.cpp.o -c /home/sunkim317/hpc-cookbook/monte-carlo-method/pi/poplibs_ipu_pi.cpp",
-  "file": "/home/sunkim317/hpc-cookbook/monte-carlo-method/pi/poplibs_ipu_pi.cpp",
-  "output": "pi/CMakeFiles/poplibs_ipu_pi.dir/poplibs_ipu_pi.cpp.o"
-},
-{
-  "directory": "/home/sunkim317/hpc-cookbook/monte-carlo-method/build/pi",
   "command": "/usr/bin/g++  -I/home/sunkim317/.local/include -isystem /home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/include  -Wall -Werror -ansi -Wno-deprecated -g -std=c++17 -o CMakeFiles/vertex_ipu_pi.dir/vertex_ipu_pi.cpp.o -c /home/sunkim317/hpc-cookbook/monte-carlo-method/pi/vertex_ipu_pi.cpp",
   "file": "/home/sunkim317/hpc-cookbook/monte-carlo-method/pi/vertex_ipu_pi.cpp",
   "output": "pi/CMakeFiles/vertex_ipu_pi.dir/vertex_ipu_pi.cpp.o"
@@ -16,29 +10,5 @@
   "command": "/usr/bin/g++  -I/home/sunkim317/.local/include -isystem /home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/include  -Wall -Werror -ansi -Wno-deprecated -g -std=c++17 -o CMakeFiles/iterative_ipu_pi.dir/iterative_ipu_pi.cpp.o -c /home/sunkim317/hpc-cookbook/monte-carlo-method/pi/iterative_ipu_pi.cpp",
   "file": "/home/sunkim317/hpc-cookbook/monte-carlo-method/pi/iterative_ipu_pi.cpp",
   "output": "pi/CMakeFiles/iterative_ipu_pi.dir/iterative_ipu_pi.cpp.o"
-},
-{
-  "directory": "/home/sunkim317/hpc-cookbook/monte-carlo-method/build/integrals",
-  "command": "/usr/bin/g++  -I/home/sunkim317/.local/include -isystem /home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/include  -Wall -Werror -ansi -Wno-deprecated -g -std=c++17 -o CMakeFiles/vertex_ipu_cont.dir/vertex_ipu_cont.cpp.o -c /home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/vertex_ipu_cont.cpp",
-  "file": "/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/vertex_ipu_cont.cpp",
-  "output": "integrals/CMakeFiles/vertex_ipu_cont.dir/vertex_ipu_cont.cpp.o"
-},
-{
-  "directory": "/home/sunkim317/hpc-cookbook/monte-carlo-method/build/integrals",
-  "command": "/usr/bin/g++  -I/home/sunkim317/.local/include -isystem /home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/include  -Wall -Werror -ansi -Wno-deprecated -g -std=c++17 -o CMakeFiles/vertex_ipu_nag.dir/vertex_ipu_nag.cpp.o -c /home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/vertex_ipu_nag.cpp",
-  "file": "/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/vertex_ipu_nag.cpp",
-  "output": "integrals/CMakeFiles/vertex_ipu_nag.dir/vertex_ipu_nag.cpp.o"
-},
-{
-  "directory": "/home/sunkim317/hpc-cookbook/monte-carlo-method/build/integrals",
-  "command": "/usr/bin/g++  -I/home/sunkim317/.local/include -isystem /home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/include  -Wall -Werror -ansi -Wno-deprecated -g -std=c++17 -o CMakeFiles/vertex_ipu_corner.dir/vertex_ipu_corner.cpp.o -c /home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/vertex_ipu_corner.cpp",
-  "file": "/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/vertex_ipu_corner.cpp",
-  "output": "integrals/CMakeFiles/vertex_ipu_corner.dir/vertex_ipu_corner.cpp.o"
-},
-{
-  "directory": "/home/sunkim317/hpc-cookbook/monte-carlo-method/build/integrals",
-  "command": "/usr/bin/g++  -I/home/sunkim317/.local/include -isystem /home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/include  -Wall -Werror -ansi -Wno-deprecated -g -std=c++17 -o CMakeFiles/vertex_ipu_prod.dir/vertex_ipu_prod.cpp.o -c /home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/vertex_ipu_prod.cpp",
-  "file": "/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/vertex_ipu_prod.cpp",
-  "output": "integrals/CMakeFiles/vertex_ipu_prod.dir/vertex_ipu_prod.cpp.o"
 }
 ]

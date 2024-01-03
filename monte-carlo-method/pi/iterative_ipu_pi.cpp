@@ -47,7 +47,7 @@ using ::poplar::program::Copy;
 using ::poplar::program::Repeat;
 using ::poplar::program::Execute;
 
-static const auto MAX_TENSOR_SIZE = 55000000ul;
+static const auto MAX_TENSOR_SIZE = 550000ul;
 
 auto getIpuDevice(const unsigned int numIpus = 1) -> optional<Device> {
     DeviceManager manager = DeviceManager::createDeviceManager();
@@ -67,7 +67,7 @@ auto getIpuDevice(const unsigned int numIpus = 1) -> optional<Device> {
 
 auto createGraphAndAddCodelets(const optional<Device> &device) -> Graph {
     auto graph = poplar::Graph(device->getTarget());
-
+    poprand::addCodelets(graph);
     popops::addCodelets(graph);
     return graph;
 }
@@ -156,19 +156,21 @@ int main(int argc, char *argv[]) {
             {"target.saveArchive",                "archive.a"},
             {"debug.instrument",                  "true"},
             {"debug.instrumentCompute",           "true"},
+           // {"debug.loweredVarDumpFile",          "vars.capnp"},
+            {"autoReport.outputLoweredVars",      "true"},
             {"debug.instrumentControlFlow",       "true"},
             {"debug.computeInstrumentationLevel", "tile"},
             {"debug.outputAllSymbols",            "true"},
             {"autoReport.all",                    "true"},
             {"autoReport.outputSerializedGraph",  "true"},
-            {"autoReport.outputLoweredVars",      "true"},
             {"debug.retainDebugInformation",      "true"},
             {"exchange.enablePrefetch", "true"}
     };
 
+
     Program s = Repeat(iterations / chunk_size, Sequence{programs["copy_to_ipu"], programs["main"], programs["copy_to_host"]});
     auto engine = Engine(graph, {s}, ENGINE_OPTIONS);
-
+        
     std::cout << "STEP 6: Load compiled graph onto the IPU tiles" << std::endl;
     engine.load(*device);
     engine.enableExecutionProfiling();
@@ -189,7 +191,6 @@ int main(int argc, char *argv[]) {
     auto hits = 0ul;
     std::generate(vx.begin(), vx.end(), [&mt, &dist]{return dist(mt);});
     std::generate(vy.begin(), vy.end(), [&mt, &dist]{return dist(mt);});
-    std::cout << "Random number " << results.data() << std::endl;
     
     auto start = std::chrono::steady_clock::now();
     engine.run(0, "main"); // Main program

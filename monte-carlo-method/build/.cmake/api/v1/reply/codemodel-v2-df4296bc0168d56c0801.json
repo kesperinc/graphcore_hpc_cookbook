@@ -1,0 +1,85 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "pi",
+					"jsonFile" : "directory-pi-Debug-982f94d25e5f89c7776c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "pi",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "MonteCarloPIEstimation",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "iterative_ipu_pi::@7d9605848f19017dc0bc",
+					"jsonFile" : "target-iterative_ipu_pi-Debug-05ba5fc66601623096a0.json",
+					"name" : "iterative_ipu_pi",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "vertex_ipu_pi::@7d9605848f19017dc0bc",
+					"jsonFile" : "target-vertex_ipu_pi-Debug-3ccac5a115144d259d5f.json",
+					"name" : "vertex_ipu_pi",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/sunkim317/hpc-cookbook/monte-carlo-method/build",
+		"source" : "/home/sunkim317/hpc-cookbook/monte-carlo-method"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

@@ -10,9 +10,6 @@ macro(add_benchmark)
 endmacro()
 
 add_benchmark(
-        NAME poplibs_ipu_pi
-        SOURCES poplibs_ipu_pi.cpp)
-add_benchmark(
         NAME vertex_ipu_pi
         SOURCES vertex_ipu_pi.cpp)
 add_benchmark(

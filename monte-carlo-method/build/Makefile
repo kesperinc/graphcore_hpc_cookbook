@@ -120,19 +120,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named poplibs_ipu_pi
-
-# Build rule for target.
-poplibs_ipu_pi: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 poplibs_ipu_pi
-.PHONY : poplibs_ipu_pi
-
-# fast build rule for target.
-poplibs_ipu_pi/fast:
-	$(MAKE) $(MAKESILENT) -f pi/CMakeFiles/poplibs_ipu_pi.dir/build.make pi/CMakeFiles/poplibs_ipu_pi.dir/build
-.PHONY : poplibs_ipu_pi/fast
-
-#=============================================================================
 # Target rules for targets named vertex_ipu_pi
 
 # Build rule for target.
@@ -158,58 +145,6 @@ iterative_ipu_pi/fast:
 	$(MAKE) $(MAKESILENT) -f pi/CMakeFiles/iterative_ipu_pi.dir/build.make pi/CMakeFiles/iterative_ipu_pi.dir/build
 .PHONY : iterative_ipu_pi/fast
 
-#=============================================================================
-# Target rules for targets named vertex_ipu_cont
-
-# Build rule for target.
-vertex_ipu_cont: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vertex_ipu_cont
-.PHONY : vertex_ipu_cont
-
-# fast build rule for target.
-vertex_ipu_cont/fast:
-	$(MAKE) $(MAKESILENT) -f integrals/CMakeFiles/vertex_ipu_cont.dir/build.make integrals/CMakeFiles/vertex_ipu_cont.dir/build
-.PHONY : vertex_ipu_cont/fast
-
-#=============================================================================
-# Target rules for targets named vertex_ipu_nag
-
-# Build rule for target.
-vertex_ipu_nag: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vertex_ipu_nag
-.PHONY : vertex_ipu_nag
-
-# fast build rule for target.
-vertex_ipu_nag/fast:
-	$(MAKE) $(MAKESILENT) -f integrals/CMakeFiles/vertex_ipu_nag.dir/build.make integrals/CMakeFiles/vertex_ipu_nag.dir/build
-.PHONY : vertex_ipu_nag/fast
-
-#=============================================================================
-# Target rules for targets named vertex_ipu_corner
-
-# Build rule for target.
-vertex_ipu_corner: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vertex_ipu_corner
-.PHONY : vertex_ipu_corner
-
-# fast build rule for target.
-vertex_ipu_corner/fast:
-	$(MAKE) $(MAKESILENT) -f integrals/CMakeFiles/vertex_ipu_corner.dir/build.make integrals/CMakeFiles/vertex_ipu_corner.dir/build
-.PHONY : vertex_ipu_corner/fast
-
-#=============================================================================
-# Target rules for targets named vertex_ipu_prod
-
-# Build rule for target.
-vertex_ipu_prod: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vertex_ipu_prod
-.PHONY : vertex_ipu_prod
-
-# fast build rule for target.
-vertex_ipu_prod/fast:
-	$(MAKE) $(MAKESILENT) -f integrals/CMakeFiles/vertex_ipu_prod.dir/build.make integrals/CMakeFiles/vertex_ipu_prod.dir/build
-.PHONY : vertex_ipu_prod/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -219,12 +154,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... iterative_ipu_pi"
-	@echo "... poplibs_ipu_pi"
-	@echo "... vertex_ipu_cont"
-	@echo "... vertex_ipu_corner"
-	@echo "... vertex_ipu_nag"
 	@echo "... vertex_ipu_pi"
-	@echo "... vertex_ipu_prod"
 .PHONY : help
 
 

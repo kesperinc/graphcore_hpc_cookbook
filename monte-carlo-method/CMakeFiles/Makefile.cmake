@@ -46,7 +46,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.27.7/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.27.7/CMakeSystem.cmake"
   "CMakeLists.txt"
-  "integrals/CMakeLists.txt"
   "pi/CMakeLists.txt"
   "/home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/lib/cmake/gccs/gccs-config.cmake"
   "/home/sunkim317/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/lib/cmake/gccs/irm-targets-release.cmake"
@@ -77,16 +76,10 @@ set(CMAKE_MAKEFILE_OUTPUTS
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "pi/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "integrals/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "pi/CMakeFiles/poplibs_ipu_pi.dir/DependInfo.cmake"
   "pi/CMakeFiles/vertex_ipu_pi.dir/DependInfo.cmake"
   "pi/CMakeFiles/iterative_ipu_pi.dir/DependInfo.cmake"
-  "integrals/CMakeFiles/vertex_ipu_cont.dir/DependInfo.cmake"
-  "integrals/CMakeFiles/vertex_ipu_nag.dir/DependInfo.cmake"
-  "integrals/CMakeFiles/vertex_ipu_corner.dir/DependInfo.cmake"
-  "integrals/CMakeFiles/vertex_ipu_prod.dir/DependInfo.cmake"
   )

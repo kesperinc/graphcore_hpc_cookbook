@@ -1,13 +1,6 @@
 /home/sunkim317/hpc-cookbook/monte-carlo-method/CMakeFiles/edit_cache.dir
 /home/sunkim317/hpc-cookbook/monte-carlo-method/CMakeFiles/rebuild_cache.dir
-/home/sunkim317/hpc-cookbook/monte-carlo-method/pi/CMakeFiles/poplibs_ipu_pi.dir
 /home/sunkim317/hpc-cookbook/monte-carlo-method/pi/CMakeFiles/vertex_ipu_pi.dir
 /home/sunkim317/hpc-cookbook/monte-carlo-method/pi/CMakeFiles/iterative_ipu_pi.dir
 /home/sunkim317/hpc-cookbook/monte-carlo-method/pi/CMakeFiles/edit_cache.dir
 /home/sunkim317/hpc-cookbook/monte-carlo-method/pi/CMakeFiles/rebuild_cache.dir
-/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/CMakeFiles/vertex_ipu_cont.dir
-/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/CMakeFiles/vertex_ipu_nag.dir
-/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/CMakeFiles/vertex_ipu_corner.dir
-/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/CMakeFiles/vertex_ipu_prod.dir
-/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/CMakeFiles/edit_cache.dir
-/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/CMakeFiles/rebuild_cache.dir

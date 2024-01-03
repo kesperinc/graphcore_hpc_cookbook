@@ -120,20 +120,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-pi/CMakeFiles/poplibs_ipu_pi.dir/rule:
-	cd /home/sunkim317/hpc-cookbook/monte-carlo-method && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pi/CMakeFiles/poplibs_ipu_pi.dir/rule
-.PHONY : pi/CMakeFiles/poplibs_ipu_pi.dir/rule
-
-# Convenience name for target.
-poplibs_ipu_pi: pi/CMakeFiles/poplibs_ipu_pi.dir/rule
-.PHONY : poplibs_ipu_pi
-
-# fast build rule for target.
-poplibs_ipu_pi/fast:
-	cd /home/sunkim317/hpc-cookbook/monte-carlo-method && $(MAKE) $(MAKESILENT) -f pi/CMakeFiles/poplibs_ipu_pi.dir/build.make pi/CMakeFiles/poplibs_ipu_pi.dir/build
-.PHONY : poplibs_ipu_pi/fast
-
-# Convenience name for target.
 pi/CMakeFiles/vertex_ipu_pi.dir/rule:
 	cd /home/sunkim317/hpc-cookbook/monte-carlo-method && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pi/CMakeFiles/vertex_ipu_pi.dir/rule
 .PHONY : pi/CMakeFiles/vertex_ipu_pi.dir/rule
@@ -185,30 +171,6 @@ iterative_ipu_pi.cpp.s:
 	cd /home/sunkim317/hpc-cookbook/monte-carlo-method && $(MAKE) $(MAKESILENT) -f pi/CMakeFiles/iterative_ipu_pi.dir/build.make pi/CMakeFiles/iterative_ipu_pi.dir/iterative_ipu_pi.cpp.s
 .PHONY : iterative_ipu_pi.cpp.s
 
-poplibs_ipu_pi.o: poplibs_ipu_pi.cpp.o
-.PHONY : poplibs_ipu_pi.o
-
-# target to build an object file
-poplibs_ipu_pi.cpp.o:
-	cd /home/sunkim317/hpc-cookbook/monte-carlo-method && $(MAKE) $(MAKESILENT) -f pi/CMakeFiles/poplibs_ipu_pi.dir/build.make pi/CMakeFiles/poplibs_ipu_pi.dir/poplibs_ipu_pi.cpp.o
-.PHONY : poplibs_ipu_pi.cpp.o
-
-poplibs_ipu_pi.i: poplibs_ipu_pi.cpp.i
-.PHONY : poplibs_ipu_pi.i
-
-# target to preprocess a source file
-poplibs_ipu_pi.cpp.i:
-	cd /home/sunkim317/hpc-cookbook/monte-carlo-method && $(MAKE) $(MAKESILENT) -f pi/CMakeFiles/poplibs_ipu_pi.dir/build.make pi/CMakeFiles/poplibs_ipu_pi.dir/poplibs_ipu_pi.cpp.i
-.PHONY : poplibs_ipu_pi.cpp.i
-
-poplibs_ipu_pi.s: poplibs_ipu_pi.cpp.s
-.PHONY : poplibs_ipu_pi.s
-
-# target to generate assembly for a file
-poplibs_ipu_pi.cpp.s:
-	cd /home/sunkim317/hpc-cookbook/monte-carlo-method && $(MAKE) $(MAKESILENT) -f pi/CMakeFiles/poplibs_ipu_pi.dir/build.make pi/CMakeFiles/poplibs_ipu_pi.dir/poplibs_ipu_pi.cpp.s
-.PHONY : poplibs_ipu_pi.cpp.s
-
 vertex_ipu_pi.o: vertex_ipu_pi.cpp.o
 .PHONY : vertex_ipu_pi.o
 
@@ -242,14 +204,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... iterative_ipu_pi"
-	@echo "... poplibs_ipu_pi"
 	@echo "... vertex_ipu_pi"
 	@echo "... iterative_ipu_pi.o"
 	@echo "... iterative_ipu_pi.i"
 	@echo "... iterative_ipu_pi.s"
-	@echo "... poplibs_ipu_pi.o"
-	@echo "... poplibs_ipu_pi.i"
-	@echo "... poplibs_ipu_pi.s"
 	@echo "... vertex_ipu_pi.o"
 	@echo "... vertex_ipu_pi.i"
 	@echo "... vertex_ipu_pi.s"

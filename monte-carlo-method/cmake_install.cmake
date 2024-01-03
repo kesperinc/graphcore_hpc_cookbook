@@ -45,7 +45,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/sunkim317/hpc-cookbook/monte-carlo-method/pi/cmake_install.cmake")
-  include("/home/sunkim317/hpc-cookbook/monte-carlo-method/integrals/cmake_install.cmake")
 
 endif()
 

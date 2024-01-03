@@ -90,9 +90,7 @@ auto captureProfileInfo(Engine &engine) {
 int main(int argc, char *argv[]) {
     pi_options options = parse_options(argc, argv, "IPU PI Iterative");
     auto precision = options.precision;
-    auto iterations = options.iterations;
-    auto chunk_size = options.chunk_size;
-    iterations -= iterations % chunk_size;
+    auto iterations = 1ul;
 
     std::cout << "STEP 1: Connecting to an IPU device" << std::endl;
     auto device = getIpuDevice(options.num_ipus);
@@ -104,17 +102,18 @@ int main(int argc, char *argv[]) {
     std::cout << "STEP 2: Create graph and compile codelets" << std::endl;
     auto graph = createGraphAndAddCodelets(device);
 
-    std::cout << "STEP 4: Define data streams" << std::endl;
-    auto fromIpuStream = graph.addDeviceToHostFIFO("FROM_IPU", UNSIGNED_INT, chunk_size);
+    std::cout << "STEP 3: Define data streams" << std::endl;
+    auto chunk_size = 1.;
+    auto fromIpuStream = graph.addDeviceToHostFIFO("FROM_IPU", FLOAT, chunk_size);
 
-    std::cout << "STEP 3: Building the compute graph" << std::endl;
+    std::cout << "STEP 4: Building the compute graph" << std::endl;
 
     Sequence init;
     Sequence map;
 
-    auto counts = graph.addVariable(UNSIGNED_INT, {chunk_size}, "counts");
-    auto x = graph.addVariable(UNSIGNED_INT, {chunk_size}, "x");
-    auto y = graph.addVariable(UNSIGNED_INT, {chunk_size}, "y");
+    auto counts = graph.addVariable(FLOAT, {1}, "counts");
+    auto x = graph.addVariable(FLOAT, {1}, "x");
+    auto y = graph.addVariable(FLOAT, {1}, "y");
     
     poputil::mapTensorLinearly(graph, counts);
     poputil::mapTensorLinearly(graph, x);
@@ -125,6 +124,7 @@ int main(int argc, char *argv[]) {
     x = poprand::uniform(graph, NULL, 0, x, FLOAT, 0.f, 1.f, map);
     y = poprand::uniform(graph, NULL, 0, y, FLOAT, 0.f, 1.f, map);
 
+
     popops::mapInPlace(graph, popops::expr::Add(popops::expr::_1, popops::expr::Cast(popops::expr::Lte(
                                                                     popops::expr::Add(
                                                                         popops::expr::Square(popops::expr::_2), 
@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
                                                                     )
                                                                 , popops::expr::Const(1.f)
                                                             ),
-                                         UNSIGNED_INT)), {counts, x, y}, map);
+                                         FLOAT)), {counts, x, y}, map);
 
     auto copyToHostProgram = Copy(counts, fromIpuStream);
 
@@ -160,6 +160,8 @@ int main(int argc, char *argv[]) {
     auto results = std::vector<unsigned int>(chunk_size);
     engine.connectStream("FROM_IPU", results.data(), results.data() + results.size());
 
+    std::cout << "STEP 7: Random Number=" << (float)__builtin_ipu_urand32()/(float)UINT_MAX << std::endl;
+
     std::cout << "STEP 8: Run programs" << std::endl;
     auto hits = 0ul;
     
@@ -169,9 +171,6 @@ int main(int argc, char *argv[]) {
 
     for (size_t i = 0; i < results.size(); i++){
         hits += results[i]; 
-        //for(unsigned int val : results) std::cout << "Rand Number: " << " " << (float)val/(float)UINT32_MAX << std::endl;
-        for(unsigned int val : results) std::cout << "Rand Number: " << " " << val << std::endl;
-
     }
 
     std::cout << "STEP 9: Capture debug and profile info" << std::endl;
